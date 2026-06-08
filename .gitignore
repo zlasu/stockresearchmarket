@@ -1,0 +1,17 @@
+.DS_Store
+.env
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.ipynb_checkpoints/
+data/historical/
+data/raw/*.parquet
+data/raw/*.csv
+data/external/
+experiments/*
+!experiments/.gitkeep
+reports/*
+!reports/.gitkeep

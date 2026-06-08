@@ -1,0 +1,106 @@
+project:
+  name: StockResearchMarket
+  timezone: America/New_York
+  base_currency: USD
+
+data:
+  provider: yfinance
+  cache_dir: data/historical
+  raw_dir: data/raw
+  start: "2006-01-01"
+  end:
+  interval: 1d
+  adjusted_prices: true
+  retry_fallbacks:
+    - stooq
+
+universe:
+  core:
+    - SPY
+    - QQQ
+    - IWM
+    - DIA
+    - VTI
+    - TLT
+    - GLD
+    - SLV
+    - USO
+    - HYG
+    - EFA
+    - EEM
+  sectors:
+    - XLK
+    - XLF
+    - XLV
+    - XLE
+    - XLI
+    - XLY
+    - XLP
+    - XLU
+    - XLB
+    - XLRE
+  megacap:
+    - AAPL
+    - MSFT
+    - AMZN
+    - GOOGL
+    - META
+    - NVDA
+    - TSLA
+
+backtest:
+  initial_capital: 10000
+  annualization_days: 252
+  fee_bps: 1.0
+  slippage_bps: 2.0
+  spread_bps: 1.0
+  risk_free_rate: 0.03
+  benchmark: buy_hold
+
+optimization:
+  objective: sharpe_drawdown
+  min_trades: 5
+  top_n: 20
+  optuna_trials: 80
+  walk_forward:
+    train_years: 5
+    test_years: 1
+    min_windows: 3
+
+strategies:
+  sma_cross:
+    defaults:
+      fast_window: 50
+      slow_window: 200
+    grid:
+      fast_window: [20, 50, 80, 100]
+      slow_window: [120, 150, 200, 250]
+  rsi_mean_reversion:
+    defaults:
+      rsi_window: 14
+      entry_rsi: 35
+      exit_rsi: 55
+      trend_window: 200
+    grid:
+      rsi_window: [10, 14, 21]
+      entry_rsi: [25, 30, 35, 40]
+      exit_rsi: [50, 55, 60, 65]
+      trend_window: [100, 150, 200]
+  donchian_breakout:
+    defaults:
+      breakout_window: 55
+      exit_window: 20
+    grid:
+      breakout_window: [40, 55, 80, 120]
+      exit_window: [10, 20, 30, 40]
+  dual_momentum:
+    defaults:
+      lookback_days: 126
+      top_n: 4
+      rebalance: ME
+      cash_asset: TLT
+      min_momentum: 0.0
+    grid:
+      lookback_days: [63, 126, 189, 252]
+      top_n: [3, 4, 6]
+      min_momentum: [-0.02, 0.0, 0.02]
