@@ -8,6 +8,7 @@ __pycache__/
 *.egg-info/
 .ipynb_checkpoints/
 data/historical/
+data/fundamentals/
 data/raw/*.parquet
 data/raw/*.csv
 data/external/

@@ -1,0 +1,12 @@
+id: "002_garp_sma200_filter"
+name: "Experiment 002 - GARP + SMA200 Market Filter"
+description: "Baseline GARP, but moves to cash when SPY is below SMA200."
+overrides:
+  risk_management:
+    market_filter:
+      enabled: true
+      benchmark: SPY
+      sma_window: 200
+      defensive_weight: 1.0
+      cash_asset: CASH
+

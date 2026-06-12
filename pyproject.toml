@@ -16,9 +16,11 @@ dependencies = [
   "typer>=0.12",
   "rich>=13.7",
   "plotly>=5.22",
+  "requests>=2.31",
   "yfinance>=0.2.40",
   "pandas-datareader>=0.10",
   "optuna>=3.6",
+  "matplotlib>=3.10.9",
 ]
 
 [project.optional-dependencies]
@@ -40,4 +42,3 @@ target-version = "py311"
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
 ignore = ["E501"]
-

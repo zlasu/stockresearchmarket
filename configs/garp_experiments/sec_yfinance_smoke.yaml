@@ -1,0 +1,28 @@
+id: "sec_yfinance_smoke"
+name: "SEC EDGAR + yfinance smoke"
+description: "Small real-data smoke run: SEC point-in-time fundamentals, yfinance prices, no analyst revisions."
+overrides:
+  data:
+    price_provider: yfinance
+    fundamentals_provider: sec_edgar
+    estimates_provider: none
+    sector_provider: yfinance
+  universe:
+    tickers:
+      - AAPL
+      - MSFT
+      - NVDA
+      - AMZN
+      - GOOGL
+      - META
+      - JPM
+      - XOM
+    min_history_years: 1
+    min_market_cap_usd: 5000000000
+    min_avg_dollar_volume: 10000000
+    require_fundamentals: true
+  portfolio:
+    top_n: 5
+    hold_until_rank: 5
+    max_position_weight: 0.25
+

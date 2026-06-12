@@ -1,0 +1,17 @@
+id: "001_baseline_garp"
+name: "Experiment 001 - Baseline GARP"
+description: "Top 20, monthly rebalance, equal weight, growth/quality/value/momentum/revisions when safe."
+overrides:
+  portfolio:
+    top_n: 20
+    weighting: equal
+  rebalance:
+    frequency: ME
+  risk_management:
+    market_filter:
+      enabled: false
+    sector_momentum:
+      enabled: false
+    volatility_target:
+      enabled: false
+

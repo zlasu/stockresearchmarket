@@ -1,0 +1,122 @@
+project:
+  name: Open GARP Multifactor Lab
+  universe_region: USA
+  base_currency: USD
+
+data:
+  price_provider: synthetic
+  fundamentals_provider: synthetic
+  estimates_provider: synthetic
+  sector_provider: synthetic
+  sec_user_agent:
+  cache_dir: data/historical
+  fundamentals_cache_dir: data/fundamentals
+  start: "2014-01-01"
+  end:
+  benchmark_tickers:
+    - SPY
+    - QQQ
+  cash_asset: CASH
+
+universe:
+  source: usa_large_mid_cap_mvp
+  tickers:
+    - AAPL
+    - MSFT
+    - NVDA
+    - AMZN
+    - GOOGL
+    - META
+    - AVGO
+    - JPM
+    - LLY
+    - V
+    - XOM
+    - UNH
+    - MA
+    - COST
+    - HD
+    - PG
+    - NFLX
+    - CRM
+    - AMD
+    - ADBE
+    - CSCO
+    - PEP
+    - TMO
+    - MCD
+    - NKE
+    - TXN
+    - QCOM
+    - AMAT
+    - INTU
+    - CAT
+  min_market_cap_usd: 5000000000
+  min_history_years: 3
+  min_avg_dollar_volume: 25000000
+  max_missing_price_fraction: 0.05
+  require_fundamentals: false
+
+factors:
+  winsorize_lower: 0.05
+  winsorize_upper: 0.95
+  score_method: percentile
+  include_unsafe: false
+  base_weights:
+    growth: 0.30
+    quality: 0.25
+    value: 0.15
+    momentum: 0.20
+    revisions: 0.10
+  risk_filters:
+    max_volatility_3m: 0.80
+    max_drawdown_12m: -0.70
+    require_price_above_min: 3.0
+
+portfolio:
+  top_n: 20
+  hold_until_rank: 20
+  weighting: equal
+  max_position_weight: 0.08
+  max_sector_weight: 0.35
+  turnover_threshold: 0.0
+  transaction_cost_bps: 3.5
+  tax_drag_bps_per_turnover: 0.0
+
+rebalance:
+  frequency: ME
+
+risk_management:
+  market_filter:
+    enabled: false
+    benchmark: SPY
+    sma_window: 200
+    defensive_weight: 1.0
+    cash_asset: CASH
+  sector_momentum:
+    enabled: false
+    lookback_days: 126
+    benchmark: SPY
+  volatility_target:
+    enabled: false
+    target_volatility: 0.15
+    lookback_days: 63
+
+backtest:
+  initial_capital: 10000
+  annualization_days: 252
+  risk_free_rate: 0.03
+  min_rebalance_count: 12
+
+autoresearch:
+  max_experiments: 12
+  parameter_grid:
+    top_n: [10, 20, 30, 50]
+    rebalance_frequency: [ME, QE]
+    momentum_weight: [0.10, 0.20, 0.30, 0.40]
+    quality_weight: [0.10, 0.25, 0.40]
+    growth_weight: [0.10, 0.30, 0.40]
+    value_weight: [0.00, 0.15, 0.30]
+    sma_filter: [false, true]
+    volatility_target: [0.0, 0.10, 0.15, 0.20]
+    turnover_band: [0, 30, 40]

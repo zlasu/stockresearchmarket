@@ -1,0 +1,10 @@
+id: "003_garp_sector_momentum"
+name: "Experiment 003 - GARP + Sector Momentum"
+description: "Baseline GARP restricted to sectors outperforming SPY over the last 6 months."
+overrides:
+  risk_management:
+    sector_momentum:
+      enabled: true
+      lookback_days: 126
+      benchmark: SPY
+

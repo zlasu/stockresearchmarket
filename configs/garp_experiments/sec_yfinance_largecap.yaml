@@ -1,0 +1,28 @@
+id: "sec_yfinance_largecap"
+name: "SEC EDGAR + yfinance large-cap GARP"
+description: "Real-data GARP research on the default USA large-cap basket: SEC point-in-time companyfacts, yfinance prices, no analyst estimates."
+overrides:
+  data:
+    price_provider: yfinance
+    fundamentals_provider: sec_edgar
+    estimates_provider: none
+    sector_provider: yfinance
+  universe:
+    require_fundamentals: true
+    min_history_years: 1
+    min_market_cap_usd: 5000000000
+    min_avg_dollar_volume: 25000000
+  portfolio:
+    top_n: 10
+    hold_until_rank: 15
+    max_position_weight: 0.12
+    transaction_cost_bps: 3.5
+  autoresearch:
+    max_experiments: 12
+    parameter_grid:
+      top_n: [5, 10, 15, 20]
+      rebalance_frequency: [ME, QE]
+      sma_filter: [false, true]
+      volatility_target: [0.0, 0.10, 0.15]
+      turnover_band: [0, 15, 20]
+      momentum_weight: [0.10, 0.20, 0.35]

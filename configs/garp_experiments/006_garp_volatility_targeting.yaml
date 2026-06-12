@@ -1,0 +1,10 @@
+id: "006_garp_volatility_targeting"
+name: "Experiment 006 - GARP + Volatility Targeting"
+description: "Baseline GARP scaled down when realized portfolio volatility exceeds 15%."
+overrides:
+  risk_management:
+    volatility_target:
+      enabled: true
+      target_volatility: 0.15
+      lookback_days: 63
+

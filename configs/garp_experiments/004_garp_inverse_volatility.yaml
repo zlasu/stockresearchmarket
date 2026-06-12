@@ -1,0 +1,8 @@
+id: "004_garp_inverse_volatility"
+name: "Experiment 004 - GARP + Inverse Volatility"
+description: "Top 20 GARP names weighted by inverse 3M volatility."
+overrides:
+  portfolio:
+    top_n: 20
+    weighting: inverse_volatility
+

@@ -1,0 +1,8 @@
+id: "005_garp_turnover_reduction"
+name: "Experiment 005 - GARP + Turnover Reduction"
+description: "Hold names while they remain in the top 30; replace only rank breaks."
+overrides:
+  portfolio:
+    hold_until_rank: 30
+    turnover_threshold: 0.10
+

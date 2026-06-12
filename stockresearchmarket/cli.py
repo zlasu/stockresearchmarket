@@ -18,6 +18,9 @@ from stockresearchmarket.data.sources import (
     parse_tickers,
 )
 from stockresearchmarket.engine.vectorized import CostModel, run_portfolio_backtest, run_signal_backtest
+from stockresearchmarket.garp.autoresearch import load_leaderboard, run_autoresearch
+from stockresearchmarket.garp.backtest import run_garp_backtest
+from stockresearchmarket.garp.comparison import compare_garp_runs
 from stockresearchmarket.optimization.search import optimize_strategy, summarize_results, walk_forward_validate
 from stockresearchmarket.reports.plots import write_optimizer_report, write_portfolio_report, write_single_asset_report
 from stockresearchmarket.strategies.momentum import dual_momentum_weights
@@ -230,6 +233,43 @@ def smoke() -> None:
     summary = pd.DataFrame(rows)
     summary.to_csv(output_root / "summary.csv", index=False)
     _print_dataframe(summary, f"Smoke test saved to {output_root}")
+
+
+@app.command("garp-run")
+def garp_run(
+    experiment: Annotated[str, typer.Option(help="Experiment id/path, e.g. 001_baseline_garp.")] = "001_baseline_garp",
+    provider: Annotated[str | None, typer.Option(help="Price provider override: synthetic, yfinance, stooq, csv.")] = None,
+    years: Annotated[int | None, typer.Option(help="Backtest last N years.")] = 10,
+    start: Annotated[str | None, typer.Option(help="YYYY-MM-DD start date.")] = None,
+    end: Annotated[str | None, typer.Option(help="YYYY-MM-DD end date.")] = None,
+    refresh: Annotated[bool, typer.Option(help="Ignore cache and rebuild data.")] = False,
+) -> None:
+    result = run_garp_backtest(experiment=experiment, provider=provider, years=years, start=start, end=end, refresh=refresh)
+    console.print(f"[green]GARP report:[/] {result.output_dir / 'report.html'}")
+    _print_dataframe(pd.DataFrame([{**result.metrics, "output_dir": str(result.output_dir)}]), f"GARP result {result.experiment_id}")
+
+
+@app.command("garp-autoresearch")
+def garp_autoresearch(
+    base_experiment: Annotated[str, typer.Option(help="Base experiment id/path.")] = "001_baseline_garp",
+    provider: Annotated[str | None, typer.Option(help="Price provider override.")] = None,
+    years: Annotated[int | None, typer.Option(help="Backtest last N years.")] = 8,
+    max_experiments: Annotated[int | None, typer.Option(help="Max generated variants to run.")] = 6,
+) -> None:
+    leaderboard = run_autoresearch(base_experiment=base_experiment, provider=provider, years=years, max_experiments=max_experiments)
+    _print_dataframe(leaderboard, "GARP autoresearch leaderboard")
+
+
+@app.command("garp-leaderboard")
+def garp_leaderboard() -> None:
+    leaderboard = load_leaderboard()
+    _print_dataframe(leaderboard, "GARP autoresearch leaderboard")
+
+
+@app.command("garp-compare")
+def garp_compare() -> None:
+    comparison = compare_garp_runs()
+    _print_dataframe(comparison, "GARP experiment comparison")
 
 
 def _print_dataframe(frame: pd.DataFrame, title: str) -> None:
