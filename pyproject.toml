@@ -21,6 +21,7 @@ dependencies = [
   "pandas-datareader>=0.10",
   "optuna>=3.6",
   "matplotlib>=3.10.9",
+  "scikit-learn>=1.5,<2",
 ]
 
 [project.optional-dependencies]
