@@ -1,0 +1,387 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #17201e;
+  background: #e8eedb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 16%, rgba(255, 255, 255, 0.7), transparent 28%),
+    linear-gradient(135deg, #e8eedb 0%, #d5e3df 44%, #eef2e2 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.rail {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  height: 100vh;
+  padding: 28px 16px;
+}
+
+.rail-logo,
+.rail-button {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  color: #f8faf7;
+  background: #030504;
+  border: 1px solid #151b18;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.rail-logo {
+  color: #ff7a45;
+}
+
+.workspace {
+  padding: 28px 30px 48px 0;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 1480px;
+  margin: 0 auto;
+}
+
+.topbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 26px;
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(34, 47, 41, 0.12);
+  border-radius: 8px;
+  backdrop-filter: blur(16px);
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: #64726d;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 1.08;
+}
+
+h2 {
+  font-size: 16px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.input {
+  min-height: 40px;
+  min-width: 150px;
+  padding: 0 12px;
+  color: #17201e;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid #cbd6d0;
+  border-radius: 8px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 14px;
+  color: #ffffff;
+  background: #ff7a45;
+  border: 1px solid #e36a38;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.back-link,
+.inline-link {
+  color: #0f766e;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.kpi-card,
+.panel,
+.recommendation {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid #dce4df;
+  border-radius: 8px;
+  box-shadow: 0 18px 50px rgba(31, 45, 40, 0.08);
+}
+
+.kpi-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 110px;
+  padding: 18px;
+}
+
+.kpi-card span,
+.kpi-card small,
+.panel-header p,
+.experiment-row span,
+.variant-metrics,
+.recommendation p {
+  color: #65736e;
+}
+
+.kpi-card strong {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.panel {
+  padding: 18px;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.chart-card {
+  min-height: 420px;
+}
+
+.chart {
+  width: 100%;
+  height: 360px;
+}
+
+.split-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px;
+}
+
+.experiment-list,
+.variant-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.experiment-row,
+.variant-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto auto;
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+  background: #fbfcfb;
+  border: 1px solid #e1e7e3;
+  border-radius: 8px;
+}
+
+.experiment-row div:first-child,
+.variant-card {
+  min-width: 0;
+}
+
+.experiment-row strong,
+.experiment-row span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.metric-pill {
+  padding: 7px 10px;
+  color: #17201e;
+  background: #eef4ee;
+  border: 1px solid #d7e1d9;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.notice {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+  background: #fff7e8;
+  border: 1px solid #f3d8a7;
+  border-radius: 8px;
+}
+
+.notice.danger {
+  background: #fff0ed;
+  border-color: #f1b4a9;
+}
+
+.recommendation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.recommendation {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+
+.recommendation span {
+  color: #ff7a45;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.static-panel img {
+  display: block;
+  width: 100%;
+  min-height: 320px;
+  object-fit: contain;
+  background: #fcfcfd;
+  border: 1px solid #edf0ed;
+  border-radius: 8px;
+}
+
+.variant-card {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.check-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+  font-weight: 800;
+}
+
+.check-row span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.variant-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  grid-column: 1 / -1;
+  font-size: 13px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.data-table th,
+.data-table td {
+  padding: 10px 9px;
+  border-bottom: 1px solid #e3e9e5;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.data-table th {
+  color: #65736e;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 980px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .rail {
+    position: static;
+    flex-direction: row;
+    justify-content: center;
+    height: auto;
+    padding: 12px;
+  }
+
+  .workspace {
+    padding: 0 12px 28px;
+  }
+
+  .topbar,
+  .panel-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .kpi-grid,
+  .split-grid,
+  .recommendation-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .experiment-row {
+    grid-template-columns: 1fr;
+  }
+}
+

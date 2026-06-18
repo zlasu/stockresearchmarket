@@ -6,6 +6,10 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 *.egg-info/
+node_modules/
+frontend/node_modules/
+frontend/dist/
+.cache/
 .ipynb_checkpoints/
 data/historical/
 data/fundamentals/

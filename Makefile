@@ -1,7 +1,7 @@
-.PHONY: setup test lint smoke data optimize portfolio garp garp-auto sp500-current
+.PHONY: setup test lint smoke data optimize portfolio garp garp-auto sp500-current ui-api ui-web ui-test
 
 setup:
-	uv sync --extra dev --python 3.11.11
+	uv sync --extra dev --group dev --python 3.11.11
 
 test:
 	uv run pytest
@@ -29,3 +29,12 @@ garp-auto:
 
 sp500-current:
 	uv run python scripts/run_current_sp500_price_tests.py
+
+ui-api:
+	uv run uvicorn stockresearchmarket.ui.api:app --reload --host 127.0.0.1 --port 8000
+
+ui-web:
+	npm --prefix frontend run dev -- --host 127.0.0.1 --port 5173
+
+ui-test:
+	npm --prefix frontend run test

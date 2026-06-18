@@ -22,6 +22,9 @@ dependencies = [
   "optuna>=3.6",
   "matplotlib>=3.10.9",
   "scikit-learn>=1.5,<2",
+  "fastapi>=0.137.1",
+  "uvicorn[standard]>=0.49.0",
+  "seaborn>=0.13.2",
 ]
 
 [project.optional-dependencies]
@@ -43,3 +46,8 @@ target-version = "py311"
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
 ignore = ["E501"]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+]
